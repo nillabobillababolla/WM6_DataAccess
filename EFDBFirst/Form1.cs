@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EFDBFirst
@@ -62,7 +56,7 @@ namespace EFDBFirst
 
             dgvTest.DataSource = sorgu4.ToList();
 
-            this.Text = $"{db.Products.Average(x => x.UnitPrice):c2}";
+            Text = $@"{db.Products.Average(x => x.UnitPrice):c2}";
 
             var sorgu5 = db.Products
                 .Where(x => x.UnitPrice >= db.Products.Average(y => y.UnitPrice))
@@ -87,6 +81,9 @@ namespace EFDBFirst
                 };
 
             dgvTest.DataSource = sorgu6.ToList();
+
+
+
         }
     }
 }
