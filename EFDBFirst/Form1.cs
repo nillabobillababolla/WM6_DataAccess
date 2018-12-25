@@ -80,9 +80,13 @@ namespace EFDBFirst
                     p.Category.CategoryName
                 };
 
-            dgvTest.DataSource = sorgu6.ToList();
+           
 
+            // Calisanlarim kac tane sipariş almış?
+            // Hangi kategoriden toplam kaç adet siparişim var ?
+            // Siparis No - Toplam Siparis Tutarı
 
+            
 
         }
     }
