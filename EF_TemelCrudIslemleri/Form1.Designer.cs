@@ -45,6 +45,7 @@
             this.cmbKategori.Name = "cmbKategori";
             this.cmbKategori.Size = new System.Drawing.Size(121, 21);
             this.cmbKategori.TabIndex = 0;
+            this.cmbKategori.SelectedIndexChanged += new System.EventHandler(this.cmbKategori_SelectedIndexChanged);
             // 
             // txtKategoriAdi
             // 
@@ -84,7 +85,6 @@
             this.lstUrunler.Name = "lstUrunler";
             this.lstUrunler.Size = new System.Drawing.Size(448, 147);
             this.lstUrunler.TabIndex = 4;
-            this.lstUrunler.SelectedIndexChanged += new System.EventHandler(this.lstUrunler_SelectedIndexChanged);
             // 
             // Form1
             // 

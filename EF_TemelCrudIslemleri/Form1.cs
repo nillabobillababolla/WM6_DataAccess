@@ -2,6 +2,7 @@
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows.Forms;
+using EF_TemelCrudIslemleri.ViewModels;
 
 namespace EF_TemelCrudIslemleri
 {
@@ -20,9 +21,16 @@ namespace EF_TemelCrudIslemleri
         private void KategorileriGetir()
         {
             NorthEntities db = new NorthEntities();
-            cmbKategori.DataSource = db.Categories.OrderBy(category => category.CategoryName).ToList();
-            cmbKategori.DisplayMember = "CategoryName";
-            cmbKategori.ValueMember = "CategoryID";
+
+            cmbKategori.DataSource = db.Categories
+                .OrderBy(category => category.CategoryName)
+                .Select(x=>new CategoryViewModel
+                {
+                    CategoryID = x.CategoryID,
+                    CategoryName = x.CategoryName,
+                    ProductCount = x.Products.Count
+                })
+                .ToList();
         }
 
         private void btnKatKaydet_Click(object sender, EventArgs e)
@@ -71,12 +79,29 @@ namespace EF_TemelCrudIslemleri
             }
         }
 
-        private void lstUrunler_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbKategori_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbKategori.SelectedItem == null) return;
-            int catId = Int32.Parse(lstUrunler.SelectedValue.ToString());
+
+            CategoryViewModel cat = cmbKategori.SelectedItem as CategoryViewModel;
+
             var db = new NorthEntities();
-            lstUrunler.DataSource = db.Products.Where(x=>x.CategoryID==catId).OrderBy(x=>x.ProductName).ToList();
+
+            // lstUrunler.DataSource = db.Products.Where(x => x.CategoryID == cat.CategoryID).OrderBy(x => x.ProductName).ToList();
+            //   lstUrunler.DisplayMember = "ProductName";
+
+            lstUrunler.DataSource = db.Categories
+                .First(x => x.CategoryID == cat.CategoryID)
+                .Products
+                .Select(x=> new ProductViewModel
+            {
+                ProductID = x.ProductID,
+                ProductName = x.ProductName,
+                UnitPrice = x.UnitPrice
+            })
+                .OrderBy(x=>x.ProductName)
+                .ToList();
+
         }
     }
 }
