@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace EFDBFirst
@@ -83,10 +84,32 @@ namespace EFDBFirst
            
 
             // Calisanlarim kac tane sipariş almış?
+
             // Hangi kategoriden toplam kaç adet siparişim var ?
+
             // Siparis No - Toplam Siparis Tutarı
 
-            
+            var query =
+                from dbCategory in db.Categories
+                join product in db.Products on dbCategory.CategoryID equals product.CategoryID
+                join orderDetail in db.Order_Details on product.ProductID equals orderDetail.ProductID
+                group new
+                {
+                    dbCategory,
+                    orderDetail
+                } by new
+                {
+                    dbCategory.CategoryName
+                }
+                into gp
+                select new
+                {
+                    gp.Key.CategoryName,
+                    Total = gp.Sum(x => x.orderDetail.Quantity)
+                };
+
+
+
 
         }
     }
