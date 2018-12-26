@@ -81,8 +81,6 @@ namespace EFDBFirst
                     p.Category.CategoryName
                 };
 
-           
-
             // Calisanlarim kac tane sipariş almış?
 
             // Hangi kategoriden toplam kaç adet siparişim var ?
