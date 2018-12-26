@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Gün", "2.Gün", "{35B162
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF_TemelCrudIslemleri", "EF_TemelCrudIslemleri\EF_TemelCrudIslemleri.csproj", "{00998944-A488-464E-BDE9-56EBA93E0841}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudOdev", "CrudOdev\CrudOdev.csproj", "{ABB98191-BDD2-4EE7-AFF0-C5D2B80E82E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{00998944-A488-464E-BDE9-56EBA93E0841}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00998944-A488-464E-BDE9-56EBA93E0841}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00998944-A488-464E-BDE9-56EBA93E0841}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABB98191-BDD2-4EE7-AFF0-C5D2B80E82E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABB98191-BDD2-4EE7-AFF0-C5D2B80E82E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABB98191-BDD2-4EE7-AFF0-C5D2B80E82E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABB98191-BDD2-4EE7-AFF0-C5D2B80E82E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DD2A07AA-78EB-4EA1-A10E-2BDC3A2CFC8E} = {35037086-0DCC-4C20-A523-DA386AB304F3}
 		{00998944-A488-464E-BDE9-56EBA93E0841} = {35B16245-1D9D-408E-945F-8F58147AE584}
+		{ABB98191-BDD2-4EE7-AFF0-C5D2B80E82E6} = {35B16245-1D9D-408E-945F-8F58147AE584}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C47C2910-116B-4C6D-95E0-F3E564D2685C}
