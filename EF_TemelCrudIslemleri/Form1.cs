@@ -21,16 +21,19 @@ namespace EF_TemelCrudIslemleri
         private void KategorileriGetir()
         {
             NorthEntities db = new NorthEntities();
-
-            cmbKategori.DataSource = db.Categories
+            var kategoriler = db.Categories
                 .OrderBy(category => category.CategoryName)
-                .Select(x=>new CategoryViewModel
+                .Select(x => new CategoryViewModel
                 {
                     CategoryID = x.CategoryID,
                     CategoryName = x.CategoryName,
                     ProductCount = x.Products.Count
                 })
                 .ToList();
+
+
+            cmbKategori.DataSource = kategoriler;
+            cmbUrunKategori.DataSource = kategoriler;
         }
 
         private void btnKatKaydet_Click(object sender, EventArgs e)

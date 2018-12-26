@@ -35,7 +35,12 @@
             this.btnKatKaydet = new System.Windows.Forms.Button();
             this.ep1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.lstUrunler = new System.Windows.Forms.ListBox();
+            this.txtUrunAdi = new System.Windows.Forms.TextBox();
+            this.nuFiyat = new System.Windows.Forms.NumericUpDown();
+            this.cmbUrunKategori = new System.Windows.Forms.ComboBox();
+            this.btnUrunGuncelle = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ep1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nuFiyat)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbKategori
@@ -86,11 +91,52 @@
             this.lstUrunler.Size = new System.Drawing.Size(448, 147);
             this.lstUrunler.TabIndex = 4;
             // 
+            // txtUrunAdi
+            // 
+            this.txtUrunAdi.Location = new System.Drawing.Point(604, 12);
+            this.txtUrunAdi.Name = "txtUrunAdi";
+            this.txtUrunAdi.Size = new System.Drawing.Size(120, 20);
+            this.txtUrunAdi.TabIndex = 5;
+            // 
+            // nuFiyat
+            // 
+            this.nuFiyat.DecimalPlaces = 2;
+            this.nuFiyat.Location = new System.Drawing.Point(604, 38);
+            this.nuFiyat.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nuFiyat.Name = "nuFiyat";
+            this.nuFiyat.Size = new System.Drawing.Size(120, 20);
+            this.nuFiyat.TabIndex = 6;
+            // 
+            // cmbUrunKategori
+            // 
+            this.cmbUrunKategori.FormattingEnabled = true;
+            this.cmbUrunKategori.Location = new System.Drawing.Point(604, 65);
+            this.cmbUrunKategori.Name = "cmbUrunKategori";
+            this.cmbUrunKategori.Size = new System.Drawing.Size(120, 21);
+            this.cmbUrunKategori.TabIndex = 7;
+            // 
+            // btnUrunGuncelle
+            // 
+            this.btnUrunGuncelle.Location = new System.Drawing.Point(604, 124);
+            this.btnUrunGuncelle.Name = "btnUrunGuncelle";
+            this.btnUrunGuncelle.Size = new System.Drawing.Size(120, 35);
+            this.btnUrunGuncelle.TabIndex = 8;
+            this.btnUrunGuncelle.Text = "Ürün Güncelle";
+            this.btnUrunGuncelle.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnUrunGuncelle);
+            this.Controls.Add(this.cmbUrunKategori);
+            this.Controls.Add(this.nuFiyat);
+            this.Controls.Add(this.txtUrunAdi);
             this.Controls.Add(this.lstUrunler);
             this.Controls.Add(this.btnKatKaydet);
             this.Controls.Add(this.txtAciklama);
@@ -101,6 +147,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ep1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nuFiyat)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -114,6 +161,10 @@
         private System.Windows.Forms.Button btnKatKaydet;
         private System.Windows.Forms.ErrorProvider ep1;
         private System.Windows.Forms.ListBox lstUrunler;
+        private System.Windows.Forms.Button btnUrunGuncelle;
+        private System.Windows.Forms.ComboBox cmbUrunKategori;
+        private System.Windows.Forms.NumericUpDown nuFiyat;
+        private System.Windows.Forms.TextBox txtUrunAdi;
     }
 }
 
