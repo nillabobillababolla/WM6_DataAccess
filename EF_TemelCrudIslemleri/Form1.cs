@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace EF_TemelCrudIslemleri
         private void Form1_Load(object sender, EventArgs e)
         {
             KategorileriGetir();
+            gbUrun.Visible = false;
         }
 
         private void KategorileriGetir()
@@ -99,21 +101,23 @@ namespace EF_TemelCrudIslemleri
             CategoryViewModel cat = cmbKategori.SelectedItem as CategoryViewModel;
 
             var db = new NorthEntities();
-
+            var sorgu = db.Categories
+                .First(x => x.CategoryID == cat.CategoryID)
+                .Products
+                .Select(x => new ProductViewModel
+                {
+                    ProductID = x.ProductID,
+                    ProductName = x.ProductName,
+                    UnitPrice = x.UnitPrice
+                })
+                .OrderBy(x => x.ProductName)
+                .ToList();
             // lstUrunler.DataSource = db.Products.Where(x => x.CategoryID == cat.CategoryID).OrderBy(x => x.ProductName).ToList();
             //   lstUrunler.DisplayMember = "ProductName";
 
-            lstUrunler.DataSource = db.Categories
-                .First(x => x.CategoryID == cat.CategoryID)
-                .Products
-                .Select(x=> new ProductViewModel
-            {
-                ProductID = x.ProductID,
-                ProductName = x.ProductName,
-                UnitPrice = x.UnitPrice
-            })
-                .OrderBy(x=>x.ProductName)
-                .ToList();
+            lstUrunler.DataSource = sorgu;
+            gbUrun.Visible = sorgu.Count > 0;
+
 
         }
 
@@ -141,8 +145,77 @@ namespace EF_TemelCrudIslemleri
                     break;
                 }
             }
+        }
 
-            
+        private void btnUrunGuncelle_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ep1.Clear();
+                var db = new NorthEntities();
+                var seciliUrun = lstUrunler.SelectedItem as ProductViewModel;
+                var urun = db.Products.Find(seciliUrun.ProductID);
+
+                urun.ProductName = txtUrunAdi.Text;
+                urun.UnitPrice = nuFiyat.Value;
+                urun.CategoryID = (cmbUrunKategori.SelectedItem as CategoryViewModel).CategoryID;
+                int sonuc = db.SaveChanges();
+                KategorileriGetir();
+                MessageBox.Show($"{sonuc} urun guncellendi.");
+
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationError in dbEx.EntityValidationErrors)
+                {
+                    foreach (var error in validationError.ValidationErrors)
+                    {
+                        if (error.PropertyName == "ProductName")
+                        {
+                            ep1.SetError(txtUrunAdi, error.ErrorMessage);
+                        }
+                    }
+                }
+                MessageBox.Show(EntityHelper.ValidationMessage(dbEx), @"Bir Hata Olustu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void txtUrunAdi_MouseHover(object sender, EventArgs e)
+        {
+            ep1.Clear();
+        }
+
+        private void silToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (lstUrunler.SelectedItem==null) return;
+
+            var urunId = (lstUrunler.SelectedItem as ProductViewModel).ProductID;
+
+            var cevap = MessageBox.Show("Secili urunu silmek istiyor musunuz?", "Uyarı!", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+            if (cevap != DialogResult.Yes) return;
+
+            try
+            {
+               var db = new NorthEntities();
+               var urun = db.Products.Find(urunId);
+               db.Products.Remove(urun);
+               MessageBox.Show($"{db.SaveChanges()} kayıt silindi.");
+               KategorileriGetir();
+            }
+            catch (DbUpdateException)
+            {
+                MessageBox.Show("Silmek istediginiz kayıt baska bir tabloda bulundugu icin silemezsiniz.","Hata",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
 
         }
     }

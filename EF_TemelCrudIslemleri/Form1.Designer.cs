@@ -39,8 +39,13 @@
             this.nuFiyat = new System.Windows.Forms.NumericUpDown();
             this.cmbUrunKategori = new System.Windows.Forms.ComboBox();
             this.btnUrunGuncelle = new System.Windows.Forms.Button();
+            this.gbUrun = new System.Windows.Forms.GroupBox();
+            this.cmsUrunSil = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.silToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ep1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuFiyat)).BeginInit();
+            this.gbUrun.SuspendLayout();
+            this.cmsUrunSil.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmbKategori
@@ -88,21 +93,22 @@
             this.lstUrunler.FormattingEnabled = true;
             this.lstUrunler.Location = new System.Drawing.Point(139, 12);
             this.lstUrunler.Name = "lstUrunler";
-            this.lstUrunler.Size = new System.Drawing.Size(448, 147);
+            this.lstUrunler.Size = new System.Drawing.Size(448, 199);
             this.lstUrunler.TabIndex = 4;
             this.lstUrunler.SelectedIndexChanged += new System.EventHandler(this.lstUrunler_SelectedIndexChanged);
             // 
             // txtUrunAdi
             // 
-            this.txtUrunAdi.Location = new System.Drawing.Point(604, 12);
+            this.txtUrunAdi.Location = new System.Drawing.Point(6, 29);
             this.txtUrunAdi.Name = "txtUrunAdi";
             this.txtUrunAdi.Size = new System.Drawing.Size(120, 20);
             this.txtUrunAdi.TabIndex = 5;
+            this.txtUrunAdi.MouseHover += new System.EventHandler(this.txtUrunAdi_MouseHover);
             // 
             // nuFiyat
             // 
             this.nuFiyat.DecimalPlaces = 2;
-            this.nuFiyat.Location = new System.Drawing.Point(604, 38);
+            this.nuFiyat.Location = new System.Drawing.Point(6, 55);
             this.nuFiyat.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -115,29 +121,55 @@
             // cmbUrunKategori
             // 
             this.cmbUrunKategori.FormattingEnabled = true;
-            this.cmbUrunKategori.Location = new System.Drawing.Point(604, 65);
+            this.cmbUrunKategori.Location = new System.Drawing.Point(6, 82);
             this.cmbUrunKategori.Name = "cmbUrunKategori";
             this.cmbUrunKategori.Size = new System.Drawing.Size(120, 21);
             this.cmbUrunKategori.TabIndex = 7;
             // 
             // btnUrunGuncelle
             // 
-            this.btnUrunGuncelle.Location = new System.Drawing.Point(604, 124);
+            this.btnUrunGuncelle.Location = new System.Drawing.Point(6, 141);
             this.btnUrunGuncelle.Name = "btnUrunGuncelle";
             this.btnUrunGuncelle.Size = new System.Drawing.Size(120, 35);
             this.btnUrunGuncelle.TabIndex = 8;
             this.btnUrunGuncelle.Text = "Ürün Güncelle";
             this.btnUrunGuncelle.UseVisualStyleBackColor = true;
+            this.btnUrunGuncelle.Click += new System.EventHandler(this.btnUrunGuncelle_Click);
+            // 
+            // gbUrun
+            // 
+            this.gbUrun.Controls.Add(this.txtUrunAdi);
+            this.gbUrun.Controls.Add(this.btnUrunGuncelle);
+            this.gbUrun.Controls.Add(this.nuFiyat);
+            this.gbUrun.Controls.Add(this.cmbUrunKategori);
+            this.gbUrun.Location = new System.Drawing.Point(593, 12);
+            this.gbUrun.Name = "gbUrun";
+            this.gbUrun.Size = new System.Drawing.Size(139, 199);
+            this.gbUrun.TabIndex = 9;
+            this.gbUrun.TabStop = false;
+            this.gbUrun.Text = "Ürün";
+            // 
+            // cmsUrunSil
+            // 
+            this.cmsUrunSil.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.silToolStripMenuItem});
+            this.cmsUrunSil.Name = "cmsUrunSil";
+            this.cmsUrunSil.Size = new System.Drawing.Size(181, 48);
+            // 
+            // silToolStripMenuItem
+            // 
+            this.silToolStripMenuItem.Name = "silToolStripMenuItem";
+            this.silToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.silToolStripMenuItem.Text = "Sil";
+            this.silToolStripMenuItem.Click += new System.EventHandler(this.silToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnUrunGuncelle);
-            this.Controls.Add(this.cmbUrunKategori);
-            this.Controls.Add(this.nuFiyat);
-            this.Controls.Add(this.txtUrunAdi);
+            this.ContextMenuStrip = this.cmsUrunSil;
+            this.Controls.Add(this.gbUrun);
             this.Controls.Add(this.lstUrunler);
             this.Controls.Add(this.btnKatKaydet);
             this.Controls.Add(this.txtAciklama);
@@ -145,10 +177,13 @@
             this.Controls.Add(this.cmbKategori);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Kategori ve Ürünler";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ep1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuFiyat)).EndInit();
+            this.gbUrun.ResumeLayout(false);
+            this.gbUrun.PerformLayout();
+            this.cmsUrunSil.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,6 +201,9 @@
         private System.Windows.Forms.ComboBox cmbUrunKategori;
         private System.Windows.Forms.NumericUpDown nuFiyat;
         private System.Windows.Forms.TextBox txtUrunAdi;
+        private System.Windows.Forms.GroupBox gbUrun;
+        private System.Windows.Forms.ContextMenuStrip cmsUrunSil;
+        private System.Windows.Forms.ToolStripMenuItem silToolStripMenuItem;
     }
 }
 
