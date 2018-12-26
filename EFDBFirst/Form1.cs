@@ -105,10 +105,6 @@ namespace EFDBFirst
                     gp.Key.CategoryName,
                     Total = gp.Sum(x => x.orderDetail.Quantity)
                 };
-
-
-
-
         }
     }
 }
