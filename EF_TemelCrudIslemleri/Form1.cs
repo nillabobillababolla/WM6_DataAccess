@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows.Forms;
 using EF_TemelCrudIslemleri.ViewModels;
+// ReSharper disable All
 
 namespace EF_TemelCrudIslemleri
 {
@@ -21,7 +23,7 @@ namespace EF_TemelCrudIslemleri
         private void KategorileriGetir()
         {
             NorthEntities db = new NorthEntities();
-            var kategoriler = db.Categories
+            var kategoriler1 = db.Categories
                 .OrderBy(category => category.CategoryName)
                 .Select(x => new CategoryViewModel
                 {
@@ -31,9 +33,18 @@ namespace EF_TemelCrudIslemleri
                 })
                 .ToList();
 
+            var kategoriler2 = db.Categories
+                .OrderBy(category => category.CategoryName)
+                .Select(x => new CategoryViewModel
+                {
+                    CategoryID = x.CategoryID,
+                    CategoryName = x.CategoryName,
+                    ProductCount = x.Products.Count
+                })
+                .ToList();
 
-            cmbKategori.DataSource = kategoriler;
-            cmbUrunKategori.DataSource = kategoriler;
+            cmbUrunKategori.DataSource = kategoriler2;
+            cmbKategori.DataSource = kategoriler1;
         }
 
         private void btnKatKaydet_Click(object sender, EventArgs e)
@@ -69,7 +80,6 @@ namespace EF_TemelCrudIslemleri
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void txtKategoriAdi_MouseHover(object sender, EventArgs e)
         {
             try
@@ -104,6 +114,35 @@ namespace EF_TemelCrudIslemleri
             })
                 .OrderBy(x=>x.ProductName)
                 .ToList();
+
+        }
+
+        private void lstUrunler_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstUrunler.SelectedItem==null) return;
+
+            var seciliUrun = lstUrunler.SelectedItem as ProductViewModel;
+
+            var db = new NorthEntities();
+            var urun = db.Products.Find(seciliUrun.ProductID);
+
+            txtUrunAdi.Text = urun.ProductName;
+            nuFiyat.Value = urun.UnitPrice ?? 0;
+            var katId = urun.CategoryID;
+            cmbUrunKategori.SelectedItem = katId;
+
+            var uruncatList = cmbUrunKategori.DataSource as List<CategoryViewModel>;
+
+            foreach (var item in uruncatList)
+            {
+                if (item.CategoryID==urun.CategoryID)
+                {
+                    cmbUrunKategori.SelectedItem = item;
+                    break;
+                }
+            }
+
+            
 
         }
     }

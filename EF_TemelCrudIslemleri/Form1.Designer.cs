@@ -90,6 +90,7 @@
             this.lstUrunler.Name = "lstUrunler";
             this.lstUrunler.Size = new System.Drawing.Size(448, 147);
             this.lstUrunler.TabIndex = 4;
+            this.lstUrunler.SelectedIndexChanged += new System.EventHandler(this.lstUrunler_SelectedIndexChanged);
             // 
             // txtUrunAdi
             // 
