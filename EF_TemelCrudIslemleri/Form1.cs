@@ -70,5 +70,13 @@ namespace EF_TemelCrudIslemleri
                 Console.WriteLine(exception.Message);
             }
         }
+
+        private void lstUrunler_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbKategori.SelectedItem == null) return;
+            int catId = Int32.Parse(lstUrunler.SelectedValue.ToString());
+            var db = new NorthEntities();
+            lstUrunler.DataSource = db.Products.Where(x=>x.CategoryID==catId).OrderBy(x=>x.ProductName).ToList();
+        }
     }
 }
